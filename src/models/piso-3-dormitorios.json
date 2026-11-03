@@ -1,0 +1,453 @@
+{
+  "schemaVersion": 2,
+  "id": "piso-3-dormitorios",
+  "name": "Piso de tres dormitorios",
+  "units": "m",
+  "axes": "x-right,y-up,z-down",
+  "source": {
+    "kind": "synthetic",
+    "description": "Fixture sintético creado para pruebas. No representa un inmueble real.",
+    "license": "CC0-1.0"
+  },
+  "levels": [
+    {
+      "id": "ground",
+      "elevation": 0,
+      "spaces": [
+        {
+          "id": "bed1",
+          "name": "Dormitorio 1",
+          "use": "bedroom",
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              3.5
+            ],
+            [
+              0,
+              3.5
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "bed2",
+          "name": "Dormitorio 2",
+          "use": "bedroom",
+          "polygon": [
+            [
+              4,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              3.5
+            ],
+            [
+              4,
+              3.5
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "bed3",
+          "name": "Dormitorio 3",
+          "use": "bedroom",
+          "polygon": [
+            [
+              8,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              12,
+              3.5
+            ],
+            [
+              8,
+              3.5
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "hall",
+          "name": "Distribuidor",
+          "use": "circulation",
+          "polygon": [
+            [
+              0,
+              3.5
+            ],
+            [
+              12,
+              3.5
+            ],
+            [
+              12,
+              5
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "living",
+          "name": "Salón",
+          "use": "living",
+          "polygon": [
+            [
+              0,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "kitchen",
+          "name": "Cocina",
+          "use": "kitchen",
+          "polygon": [
+            [
+              6,
+              5
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              9,
+              9
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          "holes": []
+        },
+        {
+          "id": "bath",
+          "name": "Baño",
+          "use": "bathroom",
+          "polygon": [
+            [
+              9,
+              5
+            ],
+            [
+              12,
+              5
+            ],
+            [
+              12,
+              9
+            ],
+            [
+              9,
+              9
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "walls": [
+        {
+          "id": "outer0",
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            12,
+            0
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "outer1",
+          "start": [
+            12,
+            0
+          ],
+          "end": [
+            12,
+            9
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "outer2",
+          "start": [
+            12,
+            9
+          ],
+          "end": [
+            0,
+            9
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "outer3",
+          "start": [
+            0,
+            9
+          ],
+          "end": [
+            0,
+            0
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "bed-divider1",
+          "start": [
+            4,
+            0
+          ],
+          "end": [
+            4,
+            3.5
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "bed-divider2",
+          "start": [
+            8,
+            0
+          ],
+          "end": [
+            8,
+            3.5
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "hall-north",
+          "start": [
+            0,
+            3.5
+          ],
+          "end": [
+            12,
+            3.5
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "hall-south",
+          "start": [
+            0,
+            5
+          ],
+          "end": [
+            12,
+            5
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "kitchen-divider",
+          "start": [
+            6,
+            5
+          ],
+          "end": [
+            6,
+            9
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "bath-divider",
+          "start": [
+            9,
+            5
+          ],
+          "end": [
+            9,
+            9
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        }
+      ],
+      "openings": [
+        {
+          "id": "bed-door0",
+          "wallId": "hall-north",
+          "kind": "door",
+          "offset": 1,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "bed-door1",
+          "wallId": "hall-north",
+          "kind": "door",
+          "offset": 5,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "bed-door2",
+          "wallId": "hall-north",
+          "kind": "door",
+          "offset": 9,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "day-door0",
+          "wallId": "hall-south",
+          "kind": "door",
+          "offset": 1,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "day-door1",
+          "wallId": "hall-south",
+          "kind": "door",
+          "offset": 7,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "day-door2",
+          "wallId": "hall-south",
+          "kind": "door",
+          "offset": 10,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "entry",
+          "wallId": "outer3",
+          "kind": "door",
+          "offset": 4,
+          "width": 0.9,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "window",
+          "wallId": "outer2",
+          "kind": "window",
+          "offset": 7,
+          "width": 2,
+          "sill": 1,
+          "height": 1.2
+        }
+      ],
+      "roofs": [
+        {
+          "id": "roof",
+          "kind": "flat",
+          "height": 2.7,
+          "thickness": 0.15,
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              12,
+              9
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "furniture": [
+        {
+          "id": "bed",
+          "name": "Cama",
+          "position": [
+            2,
+            0,
+            1.5
+          ],
+          "size": [
+            1.6,
+            0.55,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "sofa",
+          "name": "Sofá",
+          "position": [
+            2,
+            0,
+            7
+          ],
+          "size": [
+            2.2,
+            0.8,
+            0.9
+          ],
+          "rotation": 0
+        }
+      ]
+    }
+  ]
+}

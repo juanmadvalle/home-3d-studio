@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 2,
+  "id": "irregular-patio",
+  "name": "Vivienda irregular con patio",
+  "units": "m",
+  "axes": "x-right,y-up,z-down",
+  "source": {
+    "kind": "synthetic",
+    "description": "Fixture sintético creado para pruebas. No representa un inmueble real.",
+    "license": "CC0-1.0"
+  },
+  "levels": [
+    {
+      "id": "ground",
+      "elevation": 0,
+      "spaces": [
+        {
+          "id": "interior",
+          "name": "Espacio interior",
+          "use": "living",
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              10
+            ],
+            [
+              0,
+              10
+            ]
+          ],
+          "holes": [
+            [
+              [
+                4,
+                3
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                4,
+                6
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "courtyard",
+          "name": "Patio abierto",
+          "use": "patio",
+          "polygon": [
+            [
+              4,
+              3
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              4,
+              6
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "walls": [
+        {
+          "id": "facade0",
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            10,
+            0
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "facade1",
+          "start": [
+            10,
+            0
+          ],
+          "end": [
+            12,
+            3
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "facade2",
+          "start": [
+            12,
+            3
+          ],
+          "end": [
+            12,
+            10
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "facade3",
+          "start": [
+            12,
+            10
+          ],
+          "end": [
+            0,
+            10
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "facade4",
+          "start": [
+            0,
+            10
+          ],
+          "end": [
+            0,
+            0
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "patio-wall0",
+          "start": [
+            4,
+            3
+          ],
+          "end": [
+            7,
+            3
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "patio-wall1",
+          "start": [
+            7,
+            3
+          ],
+          "end": [
+            7,
+            6
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "patio-wall2",
+          "start": [
+            7,
+            6
+          ],
+          "end": [
+            4,
+            6
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        },
+        {
+          "id": "patio-wall3",
+          "start": [
+            4,
+            6
+          ],
+          "end": [
+            4,
+            3
+          ],
+          "height": 2.7,
+          "thickness": 0.15
+        }
+      ],
+      "openings": [
+        {
+          "id": "patio-door",
+          "wallId": "patio-wall2",
+          "kind": "door",
+          "offset": 1,
+          "width": 1,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "front-door",
+          "wallId": "facade0",
+          "kind": "door",
+          "offset": 1,
+          "width": 1,
+          "sill": 0,
+          "height": 2.1
+        },
+        {
+          "id": "diagonal-window",
+          "wallId": "facade1",
+          "kind": "window",
+          "offset": 0.5,
+          "width": 2,
+          "sill": 1,
+          "height": 1.2
+        }
+      ],
+      "roofs": [
+        {
+          "id": "roof",
+          "kind": "flat",
+          "height": 2.7,
+          "thickness": 0.15,
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              10
+            ],
+            [
+              0,
+              10
+            ]
+          ],
+          "holes": [
+            [
+              [
+                4,
+                3
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                4,
+                6
+              ]
+            ]
+          ]
+        }
+      ],
+      "furniture": [
+        {
+          "id": "table",
+          "name": "Mesa",
+          "position": [
+            2,
+            0,
+            2
+          ],
+          "size": [
+            1.4,
+            0.75,
+            0.8
+          ],
+          "rotation": 0
+        }
+      ]
+    }
+  ]
+}

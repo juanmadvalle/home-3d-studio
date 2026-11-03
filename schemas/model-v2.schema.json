@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Home 3D normalized model v2",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "units": {
+      "const": "m"
+    },
+    "axes": {
+      "const": "x-right,y-up,z-down"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "synthetic",
+            "private-plan"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/level"
+      },
+      "minItems": 1,
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "units",
+    "axes",
+    "source",
+    "levels"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "point": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -10000,
+        "maximum": 10000
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "polygon": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 3,
+      "maxItems": 1000
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "use": {
+          "enum": [
+            "bedroom",
+            "living",
+            "kitchen",
+            "bathroom",
+            "circulation",
+            "patio",
+            "other"
+          ]
+        },
+        "polygon": {
+          "$ref": "#/$defs/polygon"
+        },
+        "holes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/polygon"
+          },
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "use",
+        "polygon",
+        "holes"
+      ],
+      "additionalProperties": false
+    },
+    "wall": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "$ref": "#/$defs/point"
+        },
+        "end": {
+          "$ref": "#/$defs/point"
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 30
+        },
+        "thickness": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 2
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "height",
+        "thickness"
+      ],
+      "additionalProperties": false
+    },
+    "opening": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wallId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "door",
+            "window"
+          ]
+        },
+        "offset": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20000
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "minimum": 0.01,
+          "maximum": 100
+        },
+        "sill": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 30
+        }
+      },
+      "required": [
+        "id",
+        "wallId",
+        "kind",
+        "offset",
+        "width",
+        "sill",
+        "height"
+      ],
+      "additionalProperties": false
+    },
+    "roof": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "height": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 30
+            },
+            "thickness": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 2
+            },
+            "polygon": {
+              "$ref": "#/$defs/polygon"
+            },
+            "holes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/polygon"
+              },
+              "maxItems": 100
+            },
+            "kind": {
+              "const": "flat"
+            }
+          },
+          "required": [
+            "id",
+            "height",
+            "thickness",
+            "polygon",
+            "holes",
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "height": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 30
+            },
+            "thickness": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 2
+            },
+            "polygon": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -10000,
+                  "maximum": 10000
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "holes": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "kind": {
+              "const": "gable"
+            },
+            "rise": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 20
+            },
+            "ridgeAxis": {
+              "enum": [
+                "x",
+                "z"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "height",
+            "thickness",
+            "polygon",
+            "holes",
+            "kind",
+            "rise",
+            "ridgeAxis"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "furniture": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "position": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "size": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 100
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "rotation": {
+          "type": "number",
+          "minimum": -6.283185307179586,
+          "maximum": 6.283185307179586
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "position",
+        "size",
+        "rotation"
+      ],
+      "additionalProperties": false
+    },
+    "level": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "elevation": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 1000
+        },
+        "spaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/space"
+          },
+          "maxItems": 5000
+        },
+        "walls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/wall"
+          },
+          "maxItems": 5000
+        },
+        "openings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/opening"
+          },
+          "maxItems": 5000
+        },
+        "roofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/roof"
+          },
+          "maxItems": 5000
+        },
+        "furniture": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/furniture"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "elevation",
+        "spaces",
+        "walls",
+        "openings",
+        "roofs"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,345 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Home 3D Studio v2.0.0</title>
+<style>
+:root{color-scheme:light;--panel:#f9fafa;--soft:#eef2f3;--ink:#1b2226;--muted:#5a656d;--line:#d0d8dc;--accent:#c4382c;--tint:#f6dedb;--scene:#dbe2e5;--shadow:0 8px 28px #14202420,0 1px 3px #14202418}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--panel:#171c20;--soft:#1f262b;--ink:#e7ebed;--muted:#a5b0b8;--line:#354048;--accent:#ee7165;--tint:#3a2422;--scene:#242c32;--shadow:0 8px 28px #0006}}
+:root[data-theme=dark]{color-scheme:dark;--panel:#171c20;--soft:#1f262b;--ink:#e7ebed;--muted:#a5b0b8;--line:#354048;--accent:#ee7165;--tint:#3a2422;--scene:#242c32;--shadow:0 8px 28px #0006}
+*{box-sizing:border-box}[hidden]{display:none!important}html,body{height:100%;margin:0;overflow:hidden}body{font:14px system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--scene);color:var(--ink);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}button,input,select,option{font:inherit;color:var(--ink);-webkit-text-fill-color:var(--ink)}button{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:10px;min-height:42px}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button:hover{border-color:var(--accent)}button[aria-pressed=true]{background:var(--tint);border-color:var(--accent);color:var(--accent);-webkit-text-fill-color:var(--accent)}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.svg-library{position:absolute;width:0;height:0;overflow:hidden}#stage{position:absolute;inset:0;touch-action:none}canvas{display:block;width:100%;height:100%}.top{position:absolute;z-index:2;top:max(14px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));display:flex;justify-content:space-between;align-items:flex-start;gap:10px;pointer-events:none}.brand,.top-tools{pointer-events:auto}.brand{max-width:min(420px,calc(100% - 104px));background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px;box-shadow:var(--shadow)}.eyebrow{font:600 10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}h1{font-size:20px;letter-spacing:.025em;line-height:1.1;margin:5px 0 7px;text-transform:uppercase}h1 b{color:var(--accent)}#model{display:block;max-width:100%;width:100%;border:0;background:var(--panel);padding:2px 20px 2px 0;font-size:13px;font-weight:600}#status{margin:6px 0 0;font:11px ui-monospace,monospace;color:var(--muted);line-height:1.45}.top-tools{display:flex;gap:7px}.icon{width:44px;height:44px;display:grid;place-items:center;box-shadow:var(--shadow);padding:0}.hint{position:absolute;z-index:1;bottom:104px;left:16px;right:16px;text-align:center;pointer-events:none}.hint p{display:inline-block;max-width:540px;padding:8px 12px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:12px;box-shadow:0 2px 10px #00000008}.sheet-open .hint{display:none}#dock{position:absolute;z-index:5;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:10px 16px max(14px,env(safe-area-inset-bottom));pointer-events:none}.dock-bar{pointer-events:auto;width:100%;max-width:460px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.dock-bar button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;border:0;background:transparent;color:var(--muted);-webkit-text-fill-color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}.dock-bar button[aria-pressed=true]{background:var(--tint);color:var(--accent);-webkit-text-fill-color:var(--accent)}#sheet{position:absolute;z-index:4;left:16px;right:16px;bottom:calc(94px + env(safe-area-inset-bottom,0px));margin:auto;max-width:460px;max-height:min(57dvh,520px);overflow:auto;overscroll-behavior:contain;padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sheet-head h2{margin:0;font-size:16px;letter-spacing:.06em;text-transform:uppercase}.close{min-height:32px;width:32px;border:0;background:var(--soft);display:grid;place-items:center}.close svg{width:17px;height:17px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.choice{display:flex;flex-direction:column;align-items:flex-start;padding:12px 10px;gap:8px;text-align:left;background:var(--soft);min-height:104px}.choice strong{font-size:14px}.choice small{color:var(--muted);font-size:11px;font-weight:400}.section-label{font:600 10px ui-monospace,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin:18px 0 10px}.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid var(--line)}.row small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.row input[type=checkbox]{appearance:none;-webkit-appearance:none;width:44px;height:26px;background:var(--line);border:0;border-radius:20px;position:relative;flex:none;margin:0;cursor:pointer}.row input[type=checkbox]:after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--panel);box-shadow:0 1px 3px #0003;transition:transform .15s}.row input:checked{background:var(--accent)}.row input:checked:after{transform:translateX(18px)}select,input[type=number]{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:10px;min-height:42px;max-width:100%}.field{display:block;font-size:12px;font-weight:600;margin:12px 0}.field select{display:block;width:100%;margin-top:6px}.coordinates{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.coordinates label{font-size:12px;color:var(--muted)}.coordinates input{width:100%;margin-top:6px;font:13px ui-monospace,monospace}.primary{width:100%;background:var(--accent);border-color:var(--accent);color:#fff;-webkit-text-fill-color:#fff;font-weight:600;padding:11px;margin-top:14px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button,.file-button{flex:1;padding:9px 12px;text-align:center;background:var(--soft);border:1px solid var(--line);border-radius:10px;font-size:12px;font-weight:600;min-height:40px;cursor:pointer}.file-button{display:flex;align-items:center;justify-content:center}.file-button:focus-within{outline:3px solid var(--accent);outline-offset:2px}.file-button input{position:absolute;opacity:0;width:1px;height:1px}.note{font-size:12px;line-height:1.5;color:var(--muted);margin:12px 0 0}#message{position:absolute;z-index:8;left:50%;top:175px;transform:translateX(-50%);max-width:calc(100% - 32px);background:var(--ink);color:var(--panel);-webkit-text-fill-color:var(--panel);border-radius:10px;padding:10px 14px;box-shadow:var(--shadow);font-size:12px;margin:0;pointer-events:none}#message:empty{display:none}#walkUI{position:absolute;inset:0;z-index:2;pointer-events:none}.crosshair{position:absolute;left:50%;top:50%;width:6px;height:6px;background:var(--accent);border-radius:50%}.walk-pad{position:absolute;left:20px;bottom:170px;display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);gap:5px;pointer-events:auto}.walk-pad button{box-shadow:var(--shadow);touch-action:none}.walk-pad button:first-child{grid-column:2}.walk-pad button:nth-child(2){grid-column:1;grid-row:2}.walk-pad button:nth-child(3){grid-column:2;grid-row:2}.walk-pad button:nth-child(4){grid-column:3;grid-row:2}.look-pad{position:absolute;right:20px;bottom:170px;display:flex;gap:6px;pointer-events:auto}.look-pad button{width:42px;touch-action:none;box-shadow:var(--shadow)}@media(max-width:420px){.brand{padding:10px;max-width:calc(100% - 52px)}h1{font-size:17px}.top-tools{flex-direction:column}.top{left:12px;right:12px;top:12px}#sheet{left:12px;right:12px}.hint p{font-size:11px}.eyebrow{font-size:9px}.choices{gap:6px}.choice{padding:10px 8px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<svg class="svg-library" aria-hidden="true"><defs><symbol id="i-view" viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8zM3 8l9 5 9-5M12 13v9"/></symbol><symbol id="i-plan" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 11h9V3M12 11v10M12 16h9"/></symbol><symbol id="i-walk" viewBox="0 0 24 24"><circle cx="14" cy="4" r="2"/><path d="m12 8-3 5H5m7-5 3 5h4M12 8l-1 8-4 6m4-6 5 6"/></symbol><symbol id="i-sofa" viewBox="0 0 24 24"><path d="M4 12V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M4 11a2 2 0 0 0-2 2v6h20v-6a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-2-2ZM5 19v2m14-2v2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8zM2 12l10 5 10-5M2 16l10 5 10-5"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M4 9V4h5m11 5V4h-5M4 15v5h5m11-5v5h-5"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-roof" viewBox="0 0 24 24"><path d="m2 12 10-9 10 9M5 10v11h14V10M9 21v-7h6v7"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol></defs></svg>
+<main id="stage" aria-label="Visor tridimensional"></main>
+<header class="top"><div class="brand"><div class="eyebrow">Estudio de viviendas · v2.0.0</div><h1>Home <b>3D</b> Studio</h1><select id="model" aria-label="Modelo"></select><p id="status" aria-live="polite">Cargando modelo…</p></div><div class="top-tools"><button id="home" class="icon" aria-label="Encuadrar modelo" title="Encuadrar"><svg aria-hidden="true"><use href="#i-home"/></svg></button><button id="roof" class="icon" aria-label="Mostrar cubierta" title="Cubierta" aria-pressed="false"><svg aria-hidden="true"><use href="#i-roof"/></svg></button></div></header>
+<div class="hint"><p id="help"></p></div><p id="message" role="status" aria-live="polite"></p>
+<div id="walkUI" hidden><span class="crosshair"></span><div class="walk-pad" aria-label="Movimiento"><button data-key="w" aria-label="Avanzar">↑</button><button data-key="a" aria-label="Desplazarse a la izquierda">←</button><button data-key="s" aria-label="Retroceder">↓</button><button data-key="d" aria-label="Desplazarse a la derecha">→</button></div><div class="look-pad" aria-label="Girar la mirada"><button data-key="ArrowLeft" aria-label="Girar a la izquierda">↶</button><button data-key="ArrowRight" aria-label="Girar a la derecha">↷</button></div></div>
+<section id="sheet" hidden aria-label="Controles del estudio"><div class="sheet-head"><h2 id="sheet-title">Vista</h2><button id="close-sheet" class="close" aria-label="Cerrar panel"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
+<div data-panel="view"><div class="choices"><button id="orbit" class="choice" aria-pressed="true"><svg aria-hidden="true"><use href="#i-view"/></svg><strong>Órbita</strong><small>Explora en 3D</small></button><button id="plan" class="choice" aria-pressed="false"><svg aria-hidden="true"><use href="#i-plan"/></svg><strong>Planta</strong><small>Vista desde arriba</small></button><button id="walk" class="choice" aria-pressed="false"><svg aria-hidden="true"><use href="#i-walk"/></svg><strong>Recorrer</strong><small>En primera persona</small></button></div><p class="section-label">Visibilidad</p><label class="row"><span>Paredes translúcidas<small>Ver la distribución interior</small></span><input id="walls" type="checkbox"></label><label class="row"><span>Puertas abiertas<small>Acceso libre durante el recorrido</small></span><input id="doors" type="checkbox" checked></label></div>
+<div data-panel="furniture" hidden><label class="field">Mueble seleccionado<select id="furniture"></select></label><form id="edit"><div class="coordinates"><label>X · metros<input id="fx" type="number" step="0.1" required></label><label>Z · metros<input id="fz" type="number" step="0.1" required></label><label>Giro · grados<input id="angle" type="number" min="-360" max="360" step="5" required></label></div><button class="primary">Aplicar y guardar</button></form><p class="note">Ajusta la posición y el giro. Los cambios se guardan por modelo; se comprueba que no atraviesen paredes.</p></div>
+<div data-panel="settings" hidden><label class="row"><span>Apariencia<small>Interfaz clara u oscura</small></span><select id="theme" aria-label="Apariencia"><option value="system">Automática</option><option value="light">Clara</option><option value="dark">Oscura</option></select></label><p class="section-label">Tu distribución</p><div class="actions"><button id="export">Exportar JSON</button><label class="file-button">Importar JSON<input id="import" type="file" accept="application/json,.json"></label></div><div class="actions"><button id="reset">Restablecer modelo</button></div><p class="note">Modelos sintéticos para pruebas. Las superficies son orientativas y no representan mediciones de inmuebles reales.</p></div>
+</section>
+<nav id="dock" aria-label="Herramientas del estudio"><div class="dock-bar"><button data-tab="view" aria-pressed="false" aria-expanded="false" aria-controls="sheet"><svg aria-hidden="true"><use href="#i-view"/></svg>Vista</button><button data-tab="furniture" aria-pressed="false" aria-expanded="false" aria-controls="sheet"><svg aria-hidden="true"><use href="#i-sofa"/></svg>Muebles</button><button data-tab="settings" aria-pressed="false" aria-expanded="false" aria-controls="sheet"><svg aria-hidden="true"><use href="#i-layers"/></svg>Ajustes</button></div></nav>
+<script src="../vendor/three-r128.min.js"></script><script src="../vendor/OrbitControls-r128.js"></script>
+<script>(function(){function start(){try{
+const MODELS=[{"schemaVersion":2,"id":"piso-3-dormitorios","name":"Piso de tres dormitorios","units":"m","axes":"x-right,y-up,z-down","source":{"kind":"synthetic","description":"Fixture sintético creado para pruebas. No representa un inmueble real.","license":"CC0-1.0"},"levels":[{"id":"ground","elevation":0,"spaces":[{"id":"bed1","name":"Dormitorio 1","use":"bedroom","polygon":[[0,0],[4,0],[4,3.5],[0,3.5]],"holes":[]},{"id":"bed2","name":"Dormitorio 2","use":"bedroom","polygon":[[4,0],[8,0],[8,3.5],[4,3.5]],"holes":[]},{"id":"bed3","name":"Dormitorio 3","use":"bedroom","polygon":[[8,0],[12,0],[12,3.5],[8,3.5]],"holes":[]},{"id":"hall","name":"Distribuidor","use":"circulation","polygon":[[0,3.5],[12,3.5],[12,5],[0,5]],"holes":[]},{"id":"living","name":"Salón","use":"living","polygon":[[0,5],[6,5],[6,9],[0,9]],"holes":[]},{"id":"kitchen","name":"Cocina","use":"kitchen","polygon":[[6,5],[9,5],[9,9],[6,9]],"holes":[]},{"id":"bath","name":"Baño","use":"bathroom","polygon":[[9,5],[12,5],[12,9],[9,9]],"holes":[]}],"walls":[{"id":"outer0","start":[0,0],"end":[12,0],"height":2.7,"thickness":0.15},{"id":"outer1","start":[12,0],"end":[12,9],"height":2.7,"thickness":0.15},{"id":"outer2","start":[12,9],"end":[0,9],"height":2.7,"thickness":0.15},{"id":"outer3","start":[0,9],"end":[0,0],"height":2.7,"thickness":0.15},{"id":"bed-divider1","start":[4,0],"end":[4,3.5],"height":2.7,"thickness":0.15},{"id":"bed-divider2","start":[8,0],"end":[8,3.5],"height":2.7,"thickness":0.15},{"id":"hall-north","start":[0,3.5],"end":[12,3.5],"height":2.7,"thickness":0.15},{"id":"hall-south","start":[0,5],"end":[12,5],"height":2.7,"thickness":0.15},{"id":"kitchen-divider","start":[6,5],"end":[6,9],"height":2.7,"thickness":0.15},{"id":"bath-divider","start":[9,5],"end":[9,9],"height":2.7,"thickness":0.15}],"openings":[{"id":"bed-door0","wallId":"hall-north","kind":"door","offset":1,"width":0.9,"sill":0,"height":2.1},{"id":"bed-door1","wallId":"hall-north","kind":"door","offset":5,"width":0.9,"sill":0,"height":2.1},{"id":"bed-door2","wallId":"hall-north","kind":"door","offset":9,"width":0.9,"sill":0,"height":2.1},{"id":"day-door0","wallId":"hall-south","kind":"door","offset":1,"width":0.9,"sill":0,"height":2.1},{"id":"day-door1","wallId":"hall-south","kind":"door","offset":7,"width":0.9,"sill":0,"height":2.1},{"id":"day-door2","wallId":"hall-south","kind":"door","offset":10,"width":0.9,"sill":0,"height":2.1},{"id":"entry","wallId":"outer3","kind":"door","offset":4,"width":0.9,"sill":0,"height":2.1},{"id":"window","wallId":"outer2","kind":"window","offset":7,"width":2,"sill":1,"height":1.2}],"roofs":[{"id":"roof","kind":"flat","height":2.7,"thickness":0.15,"polygon":[[0,0],[12,0],[12,9],[0,9]],"holes":[]}],"furniture":[{"id":"bed","name":"Cama","position":[2,0,1.5],"size":[1.6,0.55,2],"rotation":0},{"id":"sofa","name":"Sofá","position":[2,0,7],"size":[2.2,0.8,0.9],"rotation":0}]}]},{"schemaVersion":2,"id":"irregular-patio","name":"Vivienda irregular con patio","units":"m","axes":"x-right,y-up,z-down","source":{"kind":"synthetic","description":"Fixture sintético creado para pruebas. No representa un inmueble real.","license":"CC0-1.0"},"levels":[{"id":"ground","elevation":0,"spaces":[{"id":"interior","name":"Espacio interior","use":"living","polygon":[[0,0],[10,0],[12,3],[12,10],[0,10]],"holes":[[[4,3],[7,3],[7,6],[4,6]]]},{"id":"courtyard","name":"Patio abierto","use":"patio","polygon":[[4,3],[7,3],[7,6],[4,6]],"holes":[]}],"walls":[{"id":"facade0","start":[0,0],"end":[10,0],"height":2.7,"thickness":0.15},{"id":"facade1","start":[10,0],"end":[12,3],"height":2.7,"thickness":0.15},{"id":"facade2","start":[12,3],"end":[12,10],"height":2.7,"thickness":0.15},{"id":"facade3","start":[12,10],"end":[0,10],"height":2.7,"thickness":0.15},{"id":"facade4","start":[0,10],"end":[0,0],"height":2.7,"thickness":0.15},{"id":"patio-wall0","start":[4,3],"end":[7,3],"height":2.7,"thickness":0.15},{"id":"patio-wall1","start":[7,3],"end":[7,6],"height":2.7,"thickness":0.15},{"id":"patio-wall2","start":[7,6],"end":[4,6],"height":2.7,"thickness":0.15},{"id":"patio-wall3","start":[4,6],"end":[4,3],"height":2.7,"thickness":0.15}],"openings":[{"id":"patio-door","wallId":"patio-wall2","kind":"door","offset":1,"width":1,"sill":0,"height":2.1},{"id":"front-door","wallId":"facade0","kind":"door","offset":1,"width":1,"sill":0,"height":2.1},{"id":"diagonal-window","wallId":"facade1","kind":"window","offset":0.5,"width":2,"sill":1,"height":1.2}],"roofs":[{"id":"roof","kind":"flat","height":2.7,"thickness":0.15,"polygon":[[0,0],[10,0],[12,3],[12,10],[0,10]],"holes":[[[4,3],[7,3],[7,6],[4,6]]]}],"furniture":[{"id":"table","name":"Mesa","position":[2,0,2],"size":[1.4,0.75,0.8],"rotation":0}]}]},{"schemaVersion":2,"id":"casa-cubierta-inclinada","name":"Casa con cubierta inclinada","units":"m","axes":"x-right,y-up,z-down","source":{"kind":"synthetic","description":"Fixture sintético creado para pruebas. No representa un inmueble real.","license":"CC0-1.0"},"levels":[{"id":"ground","elevation":0,"spaces":[{"id":"main","name":"Estancia","use":"living","polygon":[[0,0],[8,0],[8,6],[0,6]],"holes":[]}],"walls":[{"id":"cabin-wall0","start":[0,0],"end":[8,0],"height":2.7,"thickness":0.15},{"id":"cabin-wall1","start":[8,0],"end":[8,6],"height":2.7,"thickness":0.15},{"id":"cabin-wall2","start":[8,6],"end":[0,6],"height":2.7,"thickness":0.15},{"id":"cabin-wall3","start":[0,6],"end":[0,0],"height":2.7,"thickness":0.15}],"openings":[{"id":"cabin-entry","wallId":"cabin-wall0","kind":"door","offset":3,"width":1,"sill":0,"height":2.1}],"roofs":[{"id":"roof","kind":"gable","height":2.7,"thickness":0.15,"polygon":[[0,0],[8,0],[8,6],[0,6]],"holes":[],"rise":1.5,"ridgeAxis":"x"}],"furniture":[{"id":"cabin-table","name":"Mesa","position":[2,0,2],"size":[1.2,0.75,0.8],"rotation":0}]}]}];
+// Metres; floor coordinates [x,z], elevation y. No browser dependency.
+const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+const signedArea=p=>p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+a[0]*b[1]-b[0]*a[1];},0)/2;
+function intersects(a,b,c,d){
+  const on=(p,q,r)=>Math.abs(cross(p,q,r))<1e-9&&r[0]>=Math.min(p[0],q[0])-1e-9&&r[0]<=Math.max(p[0],q[0])+1e-9&&r[1]>=Math.min(p[1],q[1])-1e-9&&r[1]<=Math.max(p[1],q[1])+1e-9;
+  return cross(a,b,c)*cross(a,b,d)<0&&cross(c,d,a)*cross(c,d,b)<0||on(a,b,c)||on(a,b,d)||on(c,d,a)||on(c,d,b);
+}
+function contains(ring,p){
+  let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const a=ring[i],b=ring[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;
+  }return inside;
+}
+const ringsIntersect=(a,b)=>a.some((p,i)=>b.some((q,j)=>intersects(p,a[(i+1)%a.length],q,b[(j+1)%b.length])));
+function wallParts(wall,openings){
+  const length=Math.hypot(wall.end[0]-wall.start[0],wall.end[1]-wall.start[1]);
+  const cuts=[0,length,...openings.flatMap(o=>[o.offset,o.offset+o.width])].sort((a,b)=>a-b);
+  const parts=[];
+  for(let i=1;i<cuts.length;i++){
+    const a=cuts[i-1],b=cuts[i];if(b-a<1e-9)continue;
+    const o=openings.find(o=>(a+b)/2>o.offset&&(a+b)/2<o.offset+o.width);
+    for(const [bottom,top] of o?[[0,o.sill],[o.sill+o.height,wall.height]]:[[0,wall.height]]){
+      if(top-bottom>1e-9)parts.push({from:a,to:b,bottom,top});
+    }
+  }return parts;
+}
+const netArea=s=>Math.abs(signedArea(s.polygon))-(s.holes||[]).reduce((n,h)=>n+Math.abs(signedArea(h)),0);
+
+const fail=m=>{throw new Error(m);};
+const number=(n,min,max,label)=>{if(typeof n!=='number'||!Number.isFinite(n)||n<min||n>max)fail(label);};
+const point=p=>{if(!Array.isArray(p)||p.length!==2)fail('point');p.forEach(n=>number(n,-10000,10000,'coordinate'));};
+const keys=(o,names)=>{if(!o||typeof o!=='object'||Array.isArray(o)||Object.keys(o).some(k=>!names.includes(k)))fail('unknown fields');};
+function ring(p){
+  if(!Array.isArray(p)||p.length<3||p.length>1000)fail('polygon');p.forEach(point);
+  if(Math.abs(signedArea(p))<1e-6)fail('polygon area');
+  for(let i=0;i<p.length;i++){
+    if(Math.hypot(p[i][0]-p[(i+1)%p.length][0],p[i][1]-p[(i+1)%p.length][1])<1e-6)fail('zero edge');
+    for(let j=i+1;j<p.length;j++)if(j!==i+1&&!(i===0&&j===p.length-1)&&intersects(p[i],p[(i+1)%p.length],p[j],p[(j+1)%p.length]))fail('self-intersection');
+  }
+}
+function surface(s){
+  ring(s.polygon);if(!Array.isArray(s.holes)||s.holes.length>100)fail('holes');
+  s.holes.forEach((h,i)=>{ring(h);if(!h.every(p=>contains(s.polygon,p))||ringsIntersect(h,s.polygon))fail('hole outside surface');
+    s.holes.slice(0,i).forEach(k=>{if(ringsIntersect(h,k)||contains(h,k[0])||contains(k,h[0]))fail('overlapping holes');});});
+}
+function validateModel(m){
+  keys(m,['schemaVersion','id','name','units','axes','source','levels']);
+  if(!m||m.schemaVersion!==2||m.units!=='m'||m.axes!=='x-right,y-up,z-down')fail('contract version/units/axes');
+  if(typeof m.id!=='string'||!/^[a-z0-9-]{1,64}$/.test(m.id)||typeof m.name!=='string'||!m.name.trim())fail('identity');
+  if(!m.source||!['synthetic','private-plan'].includes(m.source.kind)||typeof m.source.description!=='string')fail('provenance');
+  keys(m.source,['kind','description','license']);if(m.source.license!==undefined&&typeof m.source.license!=='string')fail('license');
+  if(!Array.isArray(m.levels)||!m.levels.length||m.levels.length>50)fail('levels');
+  const ids=new Set();const id=o=>{if(!o||typeof o.id!=='string'||!o.id||ids.has(o.id))fail('duplicate/missing id');ids.add(o.id);};
+  m.levels.forEach(l=>{
+    keys(l,['id','elevation','spaces','walls','openings','roofs','furniture']);
+    id(l);number(l.elevation,-100,1000,'elevation');
+    for(const k of ['spaces','walls','openings','roofs'])if(!Array.isArray(l[k])||l[k].length>5000)fail(k);
+    l.spaces.forEach(s=>{keys(s,['id','name','use','polygon','holes']);id(s);surface(s);if(typeof s.name!=='string'||!['bedroom','living','kitchen','bathroom','circulation','patio','other'].includes(s.use))fail('space use/name');});
+    const walls=new Map();l.walls.forEach(w=>{keys(w,['id','start','end','height','thickness']);id(w);point(w.start);point(w.end);if(Math.hypot(w.end[0]-w.start[0],w.end[1]-w.start[1])<1e-6)fail('zero wall');number(w.height,.1,30,'wall height');number(w.thickness,.01,2,'wall thickness');walls.set(w.id,w);});
+    l.openings.forEach((o,i)=>{
+      keys(o,['id','wallId','kind','offset','width','sill','height']);
+      id(o);const w=walls.get(o.wallId);if(!w)fail('unknown wall');if(!['door','window'].includes(o.kind))fail('opening kind');
+      number(o.offset,0,20000,'offset');number(o.width,.01,100,'width');number(o.sill,0,30,'sill');number(o.height,.01,30,'opening height');
+      if(o.offset+o.width>Math.hypot(w.end[0]-w.start[0],w.end[1]-w.start[1])+1e-9||o.sill+o.height>w.height+1e-9)fail('opening outside wall');
+      l.openings.slice(0,i).forEach(p=>{if(p.wallId===o.wallId&&p.offset<o.offset+o.width-1e-9&&o.offset<p.offset+p.width-1e-9)fail('overlapping openings');});
+    });
+    l.roofs.forEach(r=>{
+      keys(r,r.kind==='gable'?['id','kind','height','thickness','polygon','holes','ridgeAxis','rise']:['id','kind','height','thickness','polygon','holes']);id(r);surface(r);
+      if(!['flat','gable'].includes(r.kind))fail('unsupported roof');number(r.height,.1,30,'roof height');number(r.thickness,.01,2,'roof thickness');
+      if(r.kind==='gable'){
+        if(!['x','z'].includes(r.ridgeAxis))fail('ridge axis');number(r.rise,.01,20,'roof rise');
+        if(r.holes.length||r.polygon.length!==4)fail('gable requires rectangle without holes');
+        const xs=[...new Set(r.polygon.map(p=>p[0]))],zs=[...new Set(r.polygon.map(p=>p[1]))];
+        if(xs.length!==2||zs.length!==2)fail('gable requires axis-aligned rectangle');
+      }
+    });
+    if(l.furniture!==undefined){
+      if(!Array.isArray(l.furniture)||l.furniture.length>1000)fail('furniture');
+      l.furniture.forEach(f=>{keys(f,['id','name','position','size','rotation']);id(f);if(typeof f.name!=='string')fail('furniture name');
+        if(!Array.isArray(f.position)||f.position.length!==3||!Array.isArray(f.size)||f.size.length!==3)fail('furniture dimensions');
+        f.position.forEach(n=>number(n,-10000,10000,'furniture position'));f.size.forEach(n=>number(n,.01,100,'furniture size'));number(f.rotation,-Math.PI*2,Math.PI*2,'rotation');
+      });
+    }
+  });return m;
+}
+
+// A rectangular gable is explicit in the contract; unsupported contours fail validation.
+function gableMesh(roof,elevation){
+  const xs=roof.polygon.map(p=>p[0]),zs=roof.polygon.map(p=>p[1]);
+  const x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs),y=elevation+roof.height;
+  const alongX=roof.ridgeAxis==='x';
+  const a0=alongX?x0:z0,a1=alongX?x1:z1,b0=alongX?z0:x0,b1=alongX?z1:x1;
+  const pos=(a,b,h)=>alongX?[a,h,b]:[b,h,a];
+  const vertices=[pos(a0,b0,y),pos(a1,b0,y),pos(a0,(b0+b1)/2,y+roof.rise),pos(a1,(b0+b1)/2,y+roof.rise),pos(a0,b1,y),pos(a1,b1,y)];
+  vertices.push(...vertices.map(([x,h,z])=>[x,h-roof.thickness,z]));
+  const faces=[[0,2,1],[1,2,3],[2,4,3],[3,4,5]];
+  faces.push(...faces.map(([a,b,c])=>[a+6,c+6,b+6]));
+  const perimeter=[0,1,3,5,4,2];
+  for(let i=0;i<perimeter.length;i++){const a=perimeter[i],b=perimeter[(i+1)%perimeter.length];faces.push([a,b,b+6],[a,b+6,a+6]);}
+  if(!alongX)faces.forEach(f=>f.reverse());
+  return {vertices,triangles:faces};
+}
+
+// Output is renderer-independent and deterministic; all placement is data-derived.
+function generateModel(input){
+  const m=validateModel(input),primitives=[];
+  for(const l of m.levels){
+    for(const s of l.spaces)primitives.push({type:'surface',id:s.id,polygon:s.polygon,holes:s.holes,y:l.elevation,thickness:.12,material:s.use==='patio'?'patio':'floor'});
+    for(const w of l.walls){
+      const length=Math.hypot(w.end[0]-w.start[0],w.end[1]-w.start[1]),dx=(w.end[0]-w.start[0])/length,dz=(w.end[1]-w.start[1])/length;
+      for(const p of wallParts(w,l.openings.filter(o=>o.wallId===w.id)))primitives.push({type:'box',id:w.id,center:[w.start[0]+dx*(p.from+p.to)/2,l.elevation+(p.bottom+p.top)/2,w.start[1]+dz*(p.from+p.to)/2],size:[p.to-p.from,p.top-p.bottom,w.thickness],rotation:-Math.atan2(dz,dx),material:'wall'});
+      for(const o of l.openings.filter(o=>o.wallId===w.id))primitives.push({type:'box',id:o.id,center:[w.start[0]+dx*(o.offset+o.width/2),l.elevation+o.sill+o.height/2,w.start[1]+dz*(o.offset+o.width/2)],size:[o.width,o.height,.025],rotation:-Math.atan2(dz,dx),material:o.kind==='window'?'glass':'door'});
+    }
+    for(const r of l.roofs)primitives.push(r.kind==='gable'?{type:'mesh',id:r.id,...gableMesh(r,l.elevation),material:'roof'}:{type:'surface',id:r.id,polygon:r.polygon,holes:r.holes,y:l.elevation+r.height,thickness:r.thickness,material:'roof'});
+    for(const f of l.furniture||[])primitives.push({type:'box',id:f.id,center:[f.position[0],l.elevation+f.position[1]+f.size[1]/2,f.position[2]],size:[...f.size],rotation:f.rotation,material:'furniture'});
+  }
+  const points=m.levels.flatMap(l=>[...l.spaces.flatMap(s=>s.polygon),...l.walls.flatMap(w=>[w.start,w.end])]);
+  if(!points.length)throw Error('Empty geometry');
+  const bounds={min:[Math.min(...points.map(p=>p[0])),Math.min(...points.map(p=>p[1]))],max:[Math.max(...points.map(p=>p[0])),Math.max(...points.map(p=>p[1]))]};
+  return {id:m.id,primitives,bounds,area:m.levels.reduce((n,l)=>n+l.spaces.reduce((a,s)=>a+(s.use==='patio'?0:netArea(s)),0),0)};
+}
+
+// THREE is injected, so the geometry engine also runs in Node without WebGL.
+function createThreeModel(THREE,generated){
+  const group=new THREE.Group();
+  const palette={wall:0xf1eee5,floor:0xd3b890,patio:0xa6bb91,door:0x986b43,glass:0x8dc9dc,roof:0x888f98,furniture:0x58798a};
+  for(const p of generated.primitives){
+    let geometry;
+    if(p.type==='box')geometry=new THREE.BoxGeometry(...p.size);
+    else if(p.type==='mesh'){
+      geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(p.vertices.flat(),3));geometry.setIndex(p.triangles.flat());geometry.computeVertexNormals();
+    }else{
+      const shape=new THREE.Shape(p.polygon.map(([x,z])=>new THREE.Vector2(x,-z)));
+      for(const hole of p.holes)shape.holes.push(new THREE.Path(hole.map(([x,z])=>new THREE.Vector2(x,-z))));
+      geometry=new THREE.ExtrudeGeometry(shape,{depth:p.thickness,bevelEnabled:false});
+      geometry.rotateX(-Math.PI/2);geometry.translate(0,p.y-p.thickness,0);
+    }
+    const material=new THREE.MeshStandardMaterial({color:palette[p.material],roughness:.8,transparent:p.material==='glass',opacity:p.material==='glass'?.35:1,side:THREE.DoubleSide});
+    const mesh=new THREE.Mesh(geometry,material);mesh.name=p.id;mesh.userData.material=p.material;
+    if(p.type==='box'){mesh.position.set(...p.center);mesh.rotation.y=p.rotation;}
+    group.add(mesh);
+  }return group;
+}
+
+// Circle against oriented solid boxes in X/Z; only solids at the player's height matter.
+function blocked(generated,position,radius=.2,doorsOpen=false){
+  return generated.primitives.some(p=>{
+    if(p.type!=='box'||!['wall','door','furniture'].includes(p.material)||doorsOpen&&p.material==='door')return false;
+    if(position[1]+1.65<p.center[1]-p.size[1]/2||position[1]+.05>p.center[1]+p.size[1]/2)return false;
+    const dx=position[0]-p.center[0],dz=position[2]-p.center[2],c=Math.cos(p.rotation),s=Math.sin(p.rotation);
+    const x=c*dx-s*dz,z=s*dx+c*dz;
+    return Math.hypot(Math.max(Math.abs(x)-p.size[0]/2,0),Math.max(Math.abs(z)-p.size[2]/2,0))<radius;
+  });
+}
+function onFloor(level,x,z,radius=.2){
+  // Sample the footprint to prevent walking off external edges or into uncovered holes.
+  return [[0,0],[radius,0],[-radius,0],[0,radius],[0,-radius]].every(([dx,dz])=>level.spaces.some(s=>contains(s.polygon,[x+dx,z+dz])&&!s.holes.some(h=>contains(h,[x+dx,z+dz]))));
+}
+function movePlayer(generated,level,position,delta,doorsOpen=false,radius=.2){
+  const steps=Math.max(1,Math.ceil(Math.hypot(...delta)/(radius/2)));
+  if(steps>1000)throw Error('Movement too large');
+  const next=[...position];
+  for(let i=0;i<steps;i++)for(const [axis,d] of [[0,delta[0]/steps],[2,delta[1]/steps]]){
+    const candidate=[...next];candidate[axis]+=d;
+    if(onFloor(level,candidate[0],candidate[2],radius)&&!blocked(generated,candidate,radius,doorsOpen))next[axis]=candidate[axis];
+  }return next;
+}
+
+const finite=n=>typeof n==='number'&&Number.isFinite(n);
+const storageKey=model=>'home3d:v2:'+encodeURIComponent(model.id);
+function validateLayout(model,value){
+  if(!value||value.schemaVersion!==1||value.modelId!==model.id||!Array.isArray(value.items))throw Error('Layout belongs to another model or is invalid');
+  const known=new Map(model.levels.flatMap(l=>(l.furniture||[]).map(f=>[f.id,f]))),ids=new Set();
+  if(value.items.length!==known.size)throw Error('Incomplete furniture layout');
+  return {schemaVersion:1,modelId:model.id,items:value.items.map(f=>{
+    if(!f||!known.has(f.id)||ids.has(f.id)||!Array.isArray(f.position)||f.position.length!==3||!f.position.every(n=>finite(n)&&Math.abs(n)<=10000)||!finite(f.rotation)||Math.abs(f.rotation)>Math.PI*2)throw Error('Invalid furniture layout');
+    ids.add(f.id);return {id:f.id,position:[...f.position],rotation:f.rotation};
+  })};
+}
+function snapshotLayout(model){return {schemaVersion:1,modelId:model.id,items:model.levels.flatMap(l=>(l.furniture||[]).map(f=>({id:f.id,position:[...f.position],rotation:f.rotation})))};}
+function applyLayout(model,value){
+  const layout=validateLayout(model,value),copy=structuredClone(model),byId=new Map(layout.items.map(f=>[f.id,f]));
+  for(const l of copy.levels)for(const f of l.furniture||[]){const item=byId.get(f.id);f.position=[...item.position];f.rotation=item.rotation;}
+  return copy;
+}
+
+const onEdge=(ring,p)=>ring.some((a,i)=>{const b=ring[(i+1)%ring.length];return Math.abs(cross(a,b,p))<1e-8&&p[0]>=Math.min(a[0],b[0])-1e-8&&p[0]<=Math.max(a[0],b[0])+1e-8&&p[1]>=Math.min(a[1],b[1])-1e-8&&p[1]<=Math.max(a[1],b[1])+1e-8;});
+const inside=(s,p)=>contains(s.polygon,p)&&!onEdge(s.polygon,p)&&!s.holes.some(h=>contains(h,p)||onEdge(h,p));
+const belongs=(s,p)=>(contains(s.polygon,p)||onEdge(s.polygon,p))&&!s.holes.some(h=>contains(h,p)||onEdge(h,p));
+const samples=ring=>[...ring,...ring.map((p,i)=>{const q=ring[(i+1)%ring.length];return [(p[0]+q[0])/2,(p[1]+q[1])/2];}),[ring.reduce((n,p)=>n+p[0],0)/ring.length,ring.reduce((n,p)=>n+p[1],0)/ring.length]];
+function spacesOverlap(a,b){
+  if(samples(a.polygon).some(p=>belongs(a,p)&&inside(b,p))||samples(b.polygon).some(p=>inside(a,p)&&belongs(b,p)))return true;
+  return a.polygon.some((p,i)=>b.polygon.some((q,j)=>{
+    const pp=a.polygon[(i+1)%a.polygon.length],qq=b.polygon[(j+1)%b.polygon.length];
+    return cross(p,pp,q)*cross(p,pp,qq)<-1e-12&&cross(q,qq,p)*cross(q,qq,pp)<-1e-12;
+  }));
+}
+function boxFootprint(p){
+  const c=Math.cos(p.rotation),s=Math.sin(p.rotation);
+  return [[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b])=>{const x=a*p.size[0]/2,z=b*p.size[2]/2;return [p.center[0]+c*x+s*z,p.center[2]-s*x+c*z];});
+}
+function diagnoseModel(model,generated){
+  const issues=[];
+  for(const l of model.levels){
+    for(let i=0;i<l.spaces.length;i++)for(let j=i+1;j<l.spaces.length;j++)if(spacesOverlap(l.spaces[i],l.spaces[j]))issues.push({code:'space-overlap',ids:[l.spaces[i].id,l.spaces[j].id]});
+    for(const f of l.furniture||[]){
+      const box=generated.primitives.find(p=>p.id===f.id),shape={polygon:boxFootprint(box),holes:[]};
+      if(!samples(shape.polygon).every(p=>l.spaces.some(s=>inside(s,p))))issues.push({code:'furniture-outside-floor',ids:[f.id]});
+      for(const p of generated.primitives){
+        if(p===box||p.type!=='box'||!['wall','furniture'].includes(p.material))continue;
+        if(box.center[1]+box.size[1]/2<=p.center[1]-p.size[1]/2||box.center[1]-box.size[1]/2>=p.center[1]+p.size[1]/2)continue;
+        if(spacesOverlap(shape,{polygon:boxFootprint(p),holes:[]}))issues.push({code:'furniture-collision',ids:[f.id,p.id]});
+      }
+    }
+  }return issues;
+}
+
+function setupInterface(onTheme){
+  const sheet=document.querySelector('#sheet'),title=document.querySelector('#sheet-title');
+  const tabs=[...document.querySelectorAll('[data-tab]')],panels=[...document.querySelectorAll('[data-panel]')];
+  let active=null,lastTab=null,messageTimer;
+  function closePanel(restoreFocus=false){
+    active=null;sheet.hidden=true;document.body.classList.remove('sheet-open');
+    for(const tab of tabs){tab.setAttribute('aria-pressed','false');tab.setAttribute('aria-expanded','false');}
+    if(restoreFocus)lastTab?.focus();
+  }
+  for(const tab of tabs)tab.onclick=()=>{
+    if(active===tab.dataset.tab){closePanel();return;}
+    active=tab.dataset.tab;lastTab=tab;sheet.hidden=false;document.body.classList.add('sheet-open');
+    title.textContent={view:'Vista',furniture:'Mobiliario',settings:'Ajustes'}[active];
+    for(const panel of panels)panel.hidden=panel.dataset.panel!==active;
+    for(const button of tabs){const selected=button===tab;button.setAttribute('aria-pressed',String(selected));button.setAttribute('aria-expanded',String(selected));}
+  };
+  document.querySelector('#close-sheet').onclick=()=>closePanel(true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden){e.preventDefault();closePanel(true);}});
+  const theme=document.querySelector('#theme');
+  function applyTheme(value){
+    if(value==='system')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=value;
+    theme.value=value;onTheme();
+  }
+  let preference='system';try{const saved=localStorage.getItem('home3d:interface:theme');if(['system','light','dark'].includes(saved))preference=saved;}catch{}
+  applyTheme(preference);theme.onchange=()=>{applyTheme(theme.value);try{localStorage.setItem('home3d:interface:theme',theme.value);}catch{}};
+  const systemTheme=matchMedia('(prefers-color-scheme:dark)');
+  if(systemTheme.addEventListener)systemTheme.addEventListener('change',onTheme);else if(systemTheme.addListener)systemTheme.addListener(onTheme);
+  const message=document.querySelector('#message');
+  new MutationObserver(()=>{clearTimeout(messageTimer);if(message.textContent)messageTimer=setTimeout(()=>{message.textContent='';},6500);}).observe(message,{childList:true,characterData:true,subtree:true});
+  return {closePanel,setView(view){
+    for(const name of ['orbit','plan','walk'])document.querySelector('#'+name).setAttribute('aria-pressed',String(view===name));
+    document.querySelector('#walkUI').hidden=view!=='walk';
+  }};
+}
+
+const $=selector=>document.querySelector(selector),status=$('#status');
+try{
+  if(!window.THREE||!THREE.OrbitControls)throw Error('No se pudo cargar el motor 3D. Comprueba la conexión.');
+  const id=new URLSearchParams(location.search).get('model');
+  const original=MODELS.find(m=>m.id===id)||MODELS[0];let model=structuredClone(original),notice='';
+  try{const saved=localStorage.getItem(storageKey(model));if(saved)model=applyLayout(model,JSON.parse(saved));}catch{notice='No se pudo recuperar la distribución guardada.';}
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0xe6eaed);
+  const ui=setupInterface(()=>scene.background.set(getComputedStyle(document.documentElement).getPropertyValue('--scene').trim()||'#dbe2e5'));
+  const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));$('#stage').append(renderer.domElement);
+  const camera=new THREE.PerspectiveCamera(45,1,.05,1000),controls=new THREE.OrbitControls(camera,renderer.domElement);controls.enableDamping=true;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x656565,1));const sun=new THREE.DirectionalLight(0xffffff,.8);sun.position.set(-10,20,10);scene.add(sun);
+  let generated,group,showRoof=false,doorsOpen=true,walking=false,player,yaw=0,previous=performance.now();const keysDown=new Set();
+  function rebuild(){
+    generated=generateModel(model);const issues=diagnoseModel(model,generated);if(issues.length)throw Error('Distribución no válida: '+issues[0].code);
+    if(group){scene.remove(group);group.children.forEach(m=>{m.geometry.dispose();m.material.dispose();});}
+    group=createThreeModel(THREE,generated);scene.add(group);visibility();
+    status.textContent=generated.area.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' m² interiores · modelo sintético';
+  }
+  function visibility(){if(group)for(const m of group.children){if(m.userData.material==='roof')m.visible=showRoof;if(m.userData.material==='door')m.visible=!doorsOpen;if(m.userData.material==='wall'){const transparent=$('#walls').checked;m.material.transparent=transparent;m.material.opacity=transparent?.28:1;m.material.depthWrite=!transparent;m.material.needsUpdate=true;}}}
+  // Saved layouts are untrusted. Recover the published model if a saved arrangement is invalid.
+  try{rebuild();}catch{model=structuredClone(original);rebuild();notice='Se ha recuperado la distribución original.';}
+  const [x,z]=generated.bounds.min,[xx,zz]=generated.bounds.max,cx=(x+xx)/2,cz=(z+zz)/2,span=Math.max(xx-x,zz-z,1);
+  function orbit(){walking=false;keysDown.clear();controls.enabled=true;ui.setView('orbit');camera.position.set(cx-span,span*1.5,cz+span*1.5);controls.target.set(cx,0,cz);controls.update();$('#help').textContent='Arrastra para girar · Pellizca o usa la rueda para acercar';}
+  orbit();
+  $('#roof').onclick=()=>{showRoof=!showRoof;visibility();$('#roof').setAttribute('aria-pressed',String(showRoof));$('#roof').setAttribute('aria-label',showRoof?'Ocultar cubierta':'Mostrar cubierta');};
+  $('#walls').onchange=visibility;
+  $('#doors').onchange=()=>{doorsOpen=$('#doors').checked;visibility();};
+  $('#plan').onclick=()=>{orbit();ui.setView('plan');camera.position.set(cx,span*1.7,cz+.001);controls.target.set(cx,0,cz);controls.update();};
+  $('#orbit').onclick=orbit;
+  $('#home').onclick=orbit;
+  const select=$('#model');for(const m of MODELS){const o=document.createElement('option');o.value=m.id;o.textContent=m.name;select.append(o);}select.value=model.id;
+  select.onchange=()=>{location.search='?model='+encodeURIComponent(select.value);};
+  const furniture=$('#furniture');for(const f of model.levels.flatMap(l=>l.furniture||[])){const o=document.createElement('option');o.value=f.id;o.textContent=f.name;furniture.append(o);}
+  function currentFurniture(){return model.levels.flatMap(l=>l.furniture||[]).find(f=>f.id===furniture.value);}
+  function fields(){const f=currentFurniture();if(!f)return;$('#fx').value=f.position[0];$('#fz').value=f.position[2];$('#angle').value=Math.round(f.rotation*180/Math.PI);}
+  furniture.onchange=fields;fields();
+  function persist(){try{localStorage.setItem(storageKey(model),JSON.stringify(snapshotLayout(model)));$('#message').textContent='Distribución guardada para este modelo.';}catch{$('#message').textContent='No se pudo guardar en este navegador. Puedes exportar el archivo.';}}
+  $('#edit').onsubmit=e=>{e.preventDefault();const before=structuredClone(model),f=currentFurniture();if(!f)return;
+    try{f.position[0]=Number($('#fx').value);f.position[2]=Number($('#fz').value);f.rotation=Number($('#angle').value)*Math.PI/180;rebuild();persist();}
+    catch(error){model=before;rebuild();fields();$('#message').textContent=error.message;}
+  };
+  function download(name,data){const url=URL.createObjectURL(new Blob([data],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  $('#export').onclick=()=>download(model.id+'-layout.json',JSON.stringify(snapshotLayout(model),null,2));
+  $('#import').onchange=async e=>{const file=e.target.files[0];if(!file)return;const before=model;
+    try{if(file.size>1000000)throw Error('El archivo supera 1 MB.');model=applyLayout(model,JSON.parse(await file.text()));rebuild();fields();persist();}
+    catch(error){model=before;rebuild();$('#message').textContent=error.message;}finally{e.target.value='';}
+  };
+  $('#reset').onclick=()=>{model=structuredClone(original);rebuild();fields();persist();orbit();};
+  $('#walk').onclick=()=>{
+    if(walking){orbit();return;}const level=model.levels[0];let start;
+    // Find a collision-free point without relying on a property-specific spawn coordinate.
+    for(let zz=z+.4;zz<zzMax()&&!start;zz+=.3)for(let xx=x+.4;xx<generated.bounds.max[0]&&!start;xx+=.3){const p=[xx,level.elevation,zz];if(onFloor(level,xx,zz)&&!blocked(generated,p,.2,doorsOpen))start=p;}
+    if(!start){$('#message').textContent='No hay un punto libre para iniciar el recorrido.';return;}
+    player=start;walking=true;keysDown.clear();controls.enabled=false;showRoof=false;visibility();$('#roof').setAttribute('aria-pressed','false');$('#roof').setAttribute('aria-label','Mostrar cubierta');ui.setView('walk');ui.closePanel();
+    $('#help').textContent='Usa las flechas en pantalla o W/A/S/D · Esc para salir · Primera planta';
+  };
+  function zzMax(){return generated.bounds.max[1];}
+  addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;if(e.key==='Escape')orbit();if(walking&&['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();keysDown.add(e.key);}});
+  addEventListener('keyup',e=>keysDown.delete(e.key));addEventListener('blur',()=>keysDown.clear());
+  for(const button of document.querySelectorAll('[data-key]')){
+    button.onpointerdown=e=>{if(!walking)return;e.preventDefault();button.setPointerCapture(e.pointerId);keysDown.add(button.dataset.key);};
+    const release=()=>keysDown.delete(button.dataset.key);button.onpointerup=release;button.onpointercancel=release;button.onlostpointercapture=release;
+  }
+  function resize(){const rect=$('#stage').getBoundingClientRect();camera.aspect=rect.width/Math.max(rect.height,1);camera.updateProjectionMatrix();renderer.setSize(rect.width,rect.height);}addEventListener('resize',resize);resize();
+  function frame(now){requestAnimationFrame(frame);const dt=Math.min((now-previous)/1000,.05);previous=now;
+    if(walking){yaw+=(Number(keysDown.has('ArrowLeft'))-Number(keysDown.has('ArrowRight')))*dt*1.7;const f=Number(keysDown.has('w')||keysDown.has('ArrowUp'))-Number(keysDown.has('s')||keysDown.has('ArrowDown')),s=Number(keysDown.has('d'))-Number(keysDown.has('a')),norm=Math.max(1,Math.hypot(f,s));
+      player=movePlayer(generated,model.levels[0],player,[(s*Math.cos(yaw)-f*Math.sin(yaw))*dt*2/norm,(-f*Math.cos(yaw)-s*Math.sin(yaw))*dt*2/norm],doorsOpen);
+      camera.position.set(player[0],player[1]+1.65,player[2]);camera.lookAt(player[0]-Math.sin(yaw),player[1]+1.65,player[2]-Math.cos(yaw));
+    }else controls.update();renderer.render(scene,camera);
+  }requestAnimationFrame(frame);$('#message').textContent=notice;
+}catch(error){status.textContent=error.message;status.setAttribute('role','alert');}
+
+}catch(error){const output=document.getElementById("status");if(output){output.textContent="No se pudo iniciar el visor: "+error.message;output.setAttribute("role","alert");}console.error(error);}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();})();</script></body></html>
