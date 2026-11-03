@@ -14,7 +14,7 @@ Mesh tests execute the bundled real Three.js r128 runtime. They build all fixtur
 
 ## Limits
 
-No browser screenshot or interactive WebGL acceptance pass has been completed in this environment. Geometry and mesh checks do not constitute visual approval. The browser URL policy previously blocked local-file opening; that restriction was not bypassed.
+A manual visual check in a real browser was reported as passing by the maintainer on 2026-11-03. It is not automated and no screenshots are kept in the repository; the geometry and mesh tests do not constitute visual approval on their own.
 
 Pitched roofs are currently rectangular gables only. No arbitrary pitched contours, dormers, stairs, PDF/CAD interpretation, automatic plan recognition, furniture catalog or structural validation is implemented. Furniture is represented by simple boxes. Polygon overlap diagnostics cover common intersections, containment and coincident boundaries, but are not a full Boolean CAD/topology solver. Collision uses a circular player footprint and static geometry; no physics engine is used.
 

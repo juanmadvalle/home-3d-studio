@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add MIT license for project code; fixture models remain CC0-1.0.
+- Record the passing manual browser visual check in `docs/STATUS.md`.
 
 ## 2.0.0
 
