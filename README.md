@@ -41,3 +41,7 @@ The build validates geometry and diagnostics before bundling only the explicitly
 To add a model, follow the JSON contract, validate it, and list its id in `build.mjs`. Public build inputs must be synthetic fixtures licensed CC0-1.0. Gable roofs currently require axis-aligned rectangular contours without holes, with ridge axis and rise specified explicitly. Unsupported shapes fail validation rather than being approximated.
 
 The fixture and schema generators are `scripts/create-benchmarks.mjs` and `scripts/create-schema.mjs`. See `docs/STATUS.md` for verified coverage and current limits. See `THIRD_PARTY.md` for dependency provenance.
+
+## License
+
+Project code is licensed under the [MIT License](LICENSE). The synthetic fixture models in `src/models` are dedicated under CC0-1.0. Bundled Three.js keeps its own MIT license (`vendor/THREE-LICENSE.txt`).

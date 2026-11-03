@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add MIT license for project code; fixture models remain CC0-1.0.
+
 ## 2.0.0
 
 - Synthetic-only normalized models and deterministic geometry engine.

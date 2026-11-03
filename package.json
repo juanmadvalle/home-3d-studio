@@ -2,6 +2,7 @@
   "name": "home-3d-studio",
   "version": "2.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
